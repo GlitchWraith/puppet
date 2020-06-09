@@ -1,0 +1,15 @@
+---
+  users_common:
+    {username}:
+      ensure: present
+      uid: 500
+      groups:
+        - sudo
+      comment: {your name}
+      managehome: true
+      password: '{password hash}'
+      shell:  /bin/bash
+      ssh_authorized_keys:
+        userkey:
+          type: 'ssh-rsa'
+          key:  '{public key hash}'
