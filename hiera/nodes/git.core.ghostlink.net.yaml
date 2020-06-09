@@ -1,12 +1,13 @@
 ---
-  roles::git:
-    gitlab::external_url: 'https://git.ghostlink.net'
-    gitlab::nginx:
-      redirect_http_to_https: true
-    gitlab::gitlab_rails:
-      time_zone: 'UTC'
-      gitlab_email_enabled: false
-      gitlab_default_theme: 4
-      gitlab_email_display_name: 'GitLab'
-    gitlab::sidekiq:
-      shutdown_timeout: 5
+classes:
+  - gitlab
+gitlab::external_url: 'https://git.ghostlink.net'
+gitlab::nginx:
+  redirect_http_to_https: true
+gitlab::gitlab_rails:
+  time_zone: 'UTC'
+  gitlab_email_enabled: false
+  gitlab_default_theme: 4
+  gitlab_email_display_name: 'GitLab'
+gitlab::sidekiq:
+  shutdown_timeout: 5
