@@ -1,6 +1,7 @@
 ---
 classes:
   - gitlab
+  - roles::default
 gitlab::external_url: 'https://git.ghostlink.net'
 gitlab::nginx:
   redirect_http_to_https: true
