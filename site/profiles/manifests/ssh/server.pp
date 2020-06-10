@@ -1,6 +1,6 @@
 # Sets ssh config for all instances
 class profiles::ssh::server {
-    package { 'ssh':
+    package { 'openssh-server':
         ensure => present,
     } ->
     file { '/etc/ssh/sshd_config':
