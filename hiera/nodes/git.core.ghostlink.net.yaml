@@ -1,7 +1,6 @@
 ---
 classes:
   - gitlab
-  - roles::default
 gitlab::external_url: 'https://git.ghostlink.net'
 gitlab::nginx:
   redirect_http_to_https: true
@@ -12,3 +11,4 @@ gitlab::gitlab_rails:
   gitlab_email_display_name: 'GitLab'
 gitlab::sidekiq:
   shutdown_timeout: 5
+gitlab::service_provider_restart: true
