@@ -1,4 +1,26 @@
 ---
 classes:
   - prometheus::server
-  - roles::default
+  - ruby
+ruby::gems_version: latest
+prometheus::server::version: 2.19.0
+prometheus::scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: '10s'
+    scrape_timeout: '10s'
+    static_configs:
+      - targets:
+          - 'localhost:9090'
+        labels:
+          alias: 'Prometheus'
+  - job_name: 'netdata-scrape'
+    scrape_interval: '5s'
+    scrape_timeout: '5s'
+    static_configs:
+      - targets:
+          - '10.172.1.50:19999'
+          - '10.172.1.51:19999'
+          - '10.172.1.9:19999'
+        labels:
+          alias: 'netdata-scrape'
+    metrics_path: '/api/v1/allmetrics?format=prometheus'
