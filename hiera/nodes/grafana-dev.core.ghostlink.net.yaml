@@ -1,0 +1,9 @@
+---
+  classes:
+    - grafana
+  grafana::cfg:
+    app_mode: 'production'
+    server:
+      http_port: 0880
+
+
