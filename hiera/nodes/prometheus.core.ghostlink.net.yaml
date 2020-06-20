@@ -21,6 +21,7 @@ prometheus::scrape_configs:
           - '10.172.1.50:19999'
           - '10.172.1.51:19999'
           - '10.172.1.9:19999'
+          - 'storehouse1.core.ghostlink.net:19999'
         labels:
           alias: 'netdata-scrape'
     metrics_path: '/api/v1/allmetrics?format=prometheus'
