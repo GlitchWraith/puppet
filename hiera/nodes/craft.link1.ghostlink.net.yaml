@@ -12,7 +12,7 @@ minecraft::difficulty: 2
 #minecraft::level_seed:
 minecraft::motd: 'craft.ghostlink.net'
 minecraft::ops:
-  - 'Tiberious_Nero'
+  - 'Tiberius_Nero'
   - 'op2'
 minecraft::enable_rcon: false
 minecraft::plugins:
