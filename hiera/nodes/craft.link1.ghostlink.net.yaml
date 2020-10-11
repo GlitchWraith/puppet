@@ -2,8 +2,8 @@
 classes:
   - minecraft
   - letsencrypt
-  - apache
-  - selinux
+#  - apache
+#  - selinux
   - roles::default
 minecraft::source: 'recommended'
 minecraft::heap_size: 8192
@@ -19,6 +19,7 @@ minecraft::plugins:
 selinux::boolean: 'httpd_can_network_connect'
 letsencrypt::certonly::domains: 'craft.ghostlink.net'
 letsencrypt::certonly::plugin: 'apache'
+letsencrypt::config::email: service@ghostlink.net
 apache::vhost:
   craft.ghostlink.net:
     ssl: true
