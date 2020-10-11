@@ -3,8 +3,8 @@ classes:
   - minecraft
   - letsencrypt
   - apache
-#  - selinux
-#  - roles::default
+  - roles::default
+  - roles::dynmap
 minecraft::source: https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.16.3.jar
 minecraft::heap_size: 8192
 minecraft::heap_start: 4096
@@ -17,17 +17,9 @@ minecraft::ops:
 minecraft::enable_rcon: false
 minecraft::plugins:
   dynmap:
-    source: https://media.forgecdn.net/files/2975/86/Dynmap-3.0.1-spigot.jar
+    source: https://media.forgecdn.net/files/3068/612/Dynmap-3.1-beta4-spigot.jar
 selinux::boolean: 'httpd_can_network_connect'
 letsencrypt::certonly::domains: 'craft.ghostlink.net'
 letsencrypt::certonly::plugin: 'apache'
 letsencrypt::config::email: service@ghostlink.net
-#apache::vhost:
-#  craft.ghostlink.net:
-#    ssl: true
-#    ssl_cert: '/etc/letsencrypt/live/craft.ghostlink.net/cert.pem'
-#    ssl_key:  '/etc/letsencrypt/live/craft.ghostlink.net/privkey.pem'
-#    ssl_chain: '/etc/letsencrypt/live/craft.ghostlink.net/chain.pem'
-#    proxy_pass:
-#      path: '/'
-#      url: 'http://localhost:8123'
+roles::dynmap::vhostname: 'craft.ghostlink.net'
