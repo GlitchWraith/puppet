@@ -2,15 +2,17 @@
 classes:
   - minecraft
   - letsencrypt
-#  - apache
+  - apache
 #  - selinux
 #  - roles::default
 minecraft::source: https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.16.3.jar
 minecraft::heap_size: 8192
+minecraft::heap_start: 4096
 minecraft::difficulty: 2
+#minecraft::level_seed:
 minecraft::motd: 'craft.ghostlink.net'
 minecraft::ops:
-  - 'op1'
+  - 'Tiberious_Nero'
   - 'op2'
 minecraft::enable_rcon: false
 minecraft::plugins:
@@ -20,12 +22,12 @@ selinux::boolean: 'httpd_can_network_connect'
 letsencrypt::certonly::domains: 'craft.ghostlink.net'
 letsencrypt::certonly::plugin: 'apache'
 letsencrypt::config::email: service@ghostlink.net
-apache::vhost:
-  craft.ghostlink.net:
-    ssl: true
-    ssl_cert: '/etc/letsencrypt/live/craft.ghostlink.net/cert.pem'
-    ssl_key:  '/etc/letsencrypt/live/craft.ghostlink.net/privkey.pem'
-    ssl_chain: '/etc/letsencrypt/live/craft.ghostlink.net/chain.pem'
-    proxy_pass:
-      path: '/'
-      url: 'http://localhost:8123'
+#apache::vhost:
+#  craft.ghostlink.net:
+#    ssl: true
+#    ssl_cert: '/etc/letsencrypt/live/craft.ghostlink.net/cert.pem'
+#    ssl_key:  '/etc/letsencrypt/live/craft.ghostlink.net/privkey.pem'
+#    ssl_chain: '/etc/letsencrypt/live/craft.ghostlink.net/chain.pem'
+#    proxy_pass:
+#      path: '/'
+#      url: 'http://localhost:8123'
