@@ -25,6 +25,8 @@ class profiles::freeipa (
       configure_dns_server        => $dns,
       principal_usedto_joindomain => $join_principal,
       password_usedto_joindomain  => $principal_auth,
+      puppet_admin_password       => 'NOT Needed For THIS',
+      directory_services_password => 'Still NOT Needed'
     }
   }
   if  $kind == 'master'  {
