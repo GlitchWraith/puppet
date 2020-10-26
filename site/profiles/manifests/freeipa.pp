@@ -1,6 +1,6 @@
 # =Class files
 # File Sharing Site
-class profile::freeipa (
+class profiles::freeipa (
   String  $join_principal,
   String  $principal_auth,
   Boolian $dns              = false

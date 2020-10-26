@@ -1,6 +1,6 @@
 ---
 classes:
-  - tests::freeipa
+  - profiles::freeipa
 
 
 profile::freeipa::dns: false
