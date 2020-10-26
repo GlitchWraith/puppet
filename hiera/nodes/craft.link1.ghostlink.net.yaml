@@ -5,6 +5,14 @@ classes:
   - apache
   - roles::default
   - roles::dynmap
+  - profiles::freeipa
+
+
+profiles::freeipa::dns: false
+profiles::freeipa::join_principal: 'ChangeME'
+profiles::freeipa::principal_auth: 'ChangeME'
+FreeIPA_role: 'client'
+  
 minecraft::source: https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.16.3.jar
 minecraft::heap_size: 8192
 minecraft::heap_start: 4096
