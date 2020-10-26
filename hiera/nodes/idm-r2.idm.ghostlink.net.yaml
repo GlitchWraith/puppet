@@ -1,11 +1,11 @@
 ---
 classes:
-  - role::freeipa
+  - tests::freeipa
 
 
 profile::freeipa::dns: false
-profile::freeipa::join_principal:
-profile::freeipa::principal_auth:
+profile::freeipa::join_principal: 'ChangeME'
+profile::freeipa::principal_auth: 'ChangeME'
 
 
 FreeIPA_role: 'replica'
