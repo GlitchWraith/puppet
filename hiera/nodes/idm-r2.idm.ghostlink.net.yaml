@@ -12,3 +12,6 @@ FreeIPA_role: 'replica'
 
 freeipa:ipa_client_package_name: 'idm:DL1/client'
 freeipa:ipa_server_package_name: 'idm:DL1/server'
+
+freeipa:puppet_admin_password: '123'
+freeipa:directory_services_password: '123'
