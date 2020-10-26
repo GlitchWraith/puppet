@@ -38,6 +38,15 @@ class profiles::freeipa (
 
   }
 
+  if  $kind == 'client'  {
+
+    notify{ 'Installs packages only,': }
+
+    package{$freeipa::ipa_client_package_name:
+      ensure => present,
+    }
+  }
+
 
 
 
