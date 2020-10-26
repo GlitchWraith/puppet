@@ -33,4 +33,4 @@ mod 'puppetlabs-ruby', '1.0.1'
 mod 'puppet-network', '0.9.0'
 mod 'freeipa',
   :git => 'https://gitlab.adullact.net/adullact/puppet-freeipa.git'
-  :commit => '1f87f86b8215f95aeb591347eefaa091a4e97cec'
+  :tag => '5.0.2'

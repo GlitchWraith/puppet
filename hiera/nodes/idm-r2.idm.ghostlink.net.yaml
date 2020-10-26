@@ -9,3 +9,6 @@ profile::freeipa::principal_auth:
 
 
 FreeIPA_role: 'replica'
+
+freeipa:ipa_client_package_name: 'idm:DL1/client'
+freeipa:ipa_server_package_name: 'idm:DL1/server'
