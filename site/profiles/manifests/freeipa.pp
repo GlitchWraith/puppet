@@ -11,7 +11,7 @@ class profiles::freeipa (
   $kind = lookup('FreeIPA_role')
 
   if  $kind == 'replica'  {
-
+    notify{ 'Replica': }
     class {'freeipa':
       ipa_role                    => $kind,
       domain                      => lookup('ipaRealmName').downcase,
