@@ -1,0 +1,11 @@
+---
+classes:
+  - profile::freeipa
+
+
+profile::freeipa::dns: false
+profile::freeipa::join_principal:
+profile::freeipa::principal_auth:
+
+
+FreeIPA_role: 'replica'
