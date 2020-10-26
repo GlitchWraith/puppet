@@ -3,7 +3,7 @@
 class profiles::freeipa (
   String  $join_principal,
   String  $principal_auth,
-  Boolian $dns              = false
+  Boolean $dns              = false
 ){
 
 
