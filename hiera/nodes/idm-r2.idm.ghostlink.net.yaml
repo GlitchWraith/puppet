@@ -3,9 +3,9 @@ classes:
   - profiles::freeipa
 
 
-profile::freeipa::dns: false
-profile::freeipa::join_principal: 'ChangeME'
-profile::freeipa::principal_auth: 'ChangeME'
+profiles::freeipa::dns: false
+profiles::freeipa::join_principal: 'ChangeME'
+profiles::freeipa::principal_auth: 'ChangeME'
 
 
 FreeIPA_role: 'replica'
