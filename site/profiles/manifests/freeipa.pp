@@ -26,7 +26,9 @@ class profiles::freeipa (
       principal_usedto_joindomain => $join_principal,
       password_usedto_joindomain  => $principal_auth,
       puppet_admin_password       => 'NOT Needed For THIS',
-      directory_services_password => 'Still NOT Needed'
+      directory_services_password => 'Still NOT Needed',
+      ipa_server_package_name     => 'idm:DL1/server',
+      ipa_client_package_name     => 'idm:DL1/client'
     }
   }
   if  $kind == 'master'  {
