@@ -1,2 +1,5 @@
+# Authentication 
 ipaRealmName: 'GHOSTLINK.NET'
 ipaRealmMaster: 'auth.idm.ghostlink.net'
+# ruby stuff 
+ruby::gems_version: latest
