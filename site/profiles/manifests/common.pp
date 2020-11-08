@@ -8,8 +8,6 @@ class profiles::common {
     package {[
             'vim',
             'sudo',
-            'screen',
-            'tmux'
         ]:
         ensure => present,
     }

@@ -1,5 +1,5 @@
 ---
 classes:
   - ghost
-  - roles::default
 ghost::url: "https://blog.ghostlink.net"
+ghost::include_nodejs: true

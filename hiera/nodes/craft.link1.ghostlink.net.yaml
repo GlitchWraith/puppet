@@ -1,0 +1,33 @@
+---
+classes:
+  - minecraft
+  - letsencrypt
+  - apache
+  - roles::default
+  - roles::dynmap
+  - profiles::freeipa
+
+
+profiles::freeipa::dns: false
+profiles::freeipa::join_principal: 'ChangeME'
+profiles::freeipa::principal_auth: 'ChangeME'
+FreeIPA_role: 'client'
+  
+minecraft::source: https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.16.3.jar
+minecraft::heap_size: 8192
+minecraft::heap_start: 4096
+minecraft::difficulty: 2
+#minecraft::level_seed:
+minecraft::motd: 'craft.ghostlink.net'
+minecraft::ops:
+  - 'Tiberius_Nero'
+  - 'op2'
+minecraft::enable_rcon: false
+minecraft::plugins:
+  dynmap:
+    source: https://media.forgecdn.net/files/3068/612/Dynmap-3.1-beta4-spigot.jar
+selinux::boolean: 'httpd_can_network_connect'
+letsencrypt::certonly::domains: 'craft.ghostlink.net'
+letsencrypt::certonly::plugin: 'apache'
+letsencrypt::config::email: service@ghostlink.net
+roles::dynmap::vhostname: 'craft.ghostlink.net'
