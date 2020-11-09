@@ -29,7 +29,6 @@ mod 'puppetlabs-postgresql', '6.5.0'
 mod 'puppetlabs-mysql', '10.5.0'
 # Puppet Util 
 mod 'puppet-archive', :latest
-mod 'puppetlabs-ruby', :latest
 mod 'puppetlabs-stdlib', :latest
 mod 'puppetlabs-inifile', :latest
 mod 'puppetlabs-concat', :latest
