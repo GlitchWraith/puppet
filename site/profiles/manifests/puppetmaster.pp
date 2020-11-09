@@ -19,16 +19,18 @@ class profiles::puppetmaster {
   }
 
   class { '::puppet':
-    server          => true,
-    server_git_repo => false,
-    server_foreman  => false,
-    server_certname => 'puppet.core.ghostlink.net',
-    dns_alt_names   =>  [
-                          'pp.ghostlink.net',
-                          'puppet.ghostlink.net',
-                          'puppet'
-                        ],
-    hiera_config    => '/etc/hiera.yaml',
+    server                => true,
+    server_git_repo       => false,
+    server_foreman        => false,
+    server_reports        => 'store',
+    server_external_nodes => '',
+    server_certname       => 'puppet.core.ghostlink.net',
+    dns_alt_names         =>  [
+                                'pp.ghostlink.net',
+                                'puppet.ghostlink.net',
+                                'puppet'
+                              ],
+    hiera_config          => '/etc/hiera.yaml',
   }
 
   #class { 'puppet::server::puppetdb':
