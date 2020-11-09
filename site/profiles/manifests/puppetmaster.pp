@@ -3,7 +3,7 @@ class profiles::puppetmaster {
   # Puppet hiera  setup
   class { 'hiera':
           hiera_version   =>  '5',
-          hiera5_defaults =>  {"datadir" => "data", "data_hash" => "yaml_data"},
+          hiera5_defaults =>  {"datadir" => "hiera", "data_hash" => "yaml_data"},
           hierarchy       =>  [
                                 {"name" =>  "Nodes yaml", "paths" =>  ['nodes/%{::trusted.certname}.yaml',]},
                                 {"name" =>  "OS", "paths" =>  ['os/%{facts.os.name}.yaml', 'os/%{::osfamily}.yaml']},
@@ -13,25 +13,34 @@ class profiles::puppetmaster {
                               ],
           eyaml           => true,
           create_keys     => true,
-          hiera_yaml      => '/etc/puppet/hiera.yaml',
+          hiera_yaml      => '/etc/hiera.yaml',
+          create_symlink  => false,
   }
 
   class { '::puppet':
     server          => true,
     server_git_repo => false,
     server_foreman  => false,
-    server_certname => 'pp.ghostlink.net',
+    server_certname => 'puppet.core.ghostlink.net',
     dns_alt_names   =>  [
-                          'puppet.core.ghostlink.net',
+                          'pp.ghostlink.net',
                           'puppet.ghostlink.net',
                           'puppet'
                         ],
-    hiera_config    => '/etc/puppet/hiera.yaml',
+    hiera_config    => '/etc/hiera.yaml',
   }
 
-  class { 'puppet::server::puppetdb':
-    server => 'ppdb.ghostlink.net',
-  }
+  #class { 'puppet::server::puppetdb':
+  #  server => 'puppet.core.ghostlink.net',
+  #}
+
+  #class { 'puppetdb':
+  #  manage_package_repo     => false,
+  #  postgres_version        => '',
+  #  database_listen_address => 'puppet.core.ghostlink.net'
+  #  # 'postgresql-server'
+  #}
+
 
   package { 'git':
     ensure => installed,
