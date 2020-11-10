@@ -3,7 +3,7 @@ class profiles::puppetmaster {
   # Puppet hiera  setup
   class { 'hiera':
           hiera_version   =>  '5',
-          hiera5_defaults =>  {"datadir" => "hiera", "data_hash" => "yaml_data"},
+          hiera5_defaults =>  {"datadir" => "/etc/puppetlabs/code/environments/%{environment}/hiera", "data_hash" => "yaml_data"},
           hierarchy       =>  [
                                 {"name" =>  "Nodes yaml", "paths" =>  ['nodes/%{::trusted.certname}.yaml',]},
                                 {"name" =>  "OS", "paths" =>  ['os/%{facts.os.name}.yaml', 'os/%{::osfamily}.yaml']},
