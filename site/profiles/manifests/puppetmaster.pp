@@ -21,7 +21,7 @@ class profiles::puppetmaster {
     server                => true,
     server_git_repo       => false,
     server_foreman        => false,
-    server_reports        => 'store',
+    server_reports        => 'store,puppetdb',
     server_external_nodes => '',
     server_certname       => 'puppet.core.ghostlink.net',
     dns_alt_names         =>  [
@@ -30,18 +30,34 @@ class profiles::puppetmaster {
                                 'puppet'
                               ],
     hiera_config          => '/etc/hiera.yaml',
+    require               => Firewalld_port['puppet-port']
   }
 
-  #class { 'puppet::server::puppetdb':
-  #  server => 'puppet.core.ghostlink.net',
-  #}
+  class { 'puppet::server::puppetdb':
+    server => 'puppet.core.ghostlink.net',
+  }
 
-  #class { 'puppetdb':
-  #  manage_package_repo     => false,
-  #  postgres_version        => '',
-  #  database_listen_address => 'puppet.core.ghostlink.net'
-  #  # 'postgresql-server'
-  #}
+  firewalld_port { 'puppet-port':
+    ensure   => present,
+    zone     => 'public',
+    port     => 8140,
+    protocol => 'tcp',
+  }
+
+  firewalld_port { 'puppetdb-port':
+    ensure   => present,
+    zone     => 'public',
+    port     => 8081,
+    protocol => 'tcp',
+  }
+
+  class { 'puppetdb':
+    manage_package_repo     => false,
+    postgres_version        => '',
+    database_listen_address => 'puppet.core.ghostlink.net',
+    require                 => Firewalld_port['puppetdb-port']
+    # 'postgresql-server'
+  }
 
 
   package { 'git':
