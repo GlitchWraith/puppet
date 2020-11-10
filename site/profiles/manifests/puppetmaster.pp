@@ -30,7 +30,6 @@ class profiles::puppetmaster {
                                 'puppet'
                               ],
     hiera_config          => '/etc/hiera.yaml',
-    require               => Firewalld_port['puppet-port']
   }
 
   class { 'puppet::server::puppetdb':
@@ -42,6 +41,7 @@ class profiles::puppetmaster {
     zone     => 'public',
     port     => 8140,
     protocol => 'tcp',
+    before   => Class['::puppet']
   }
 
   firewalld_port { 'puppetdb-port':
@@ -49,13 +49,13 @@ class profiles::puppetmaster {
     zone     => 'public',
     port     => 8081,
     protocol => 'tcp',
+    before   => Class['puppetdb']
   }
 
   class { 'puppetdb':
     manage_package_repo     => false,
     postgres_version        => '',
     database_listen_address => 'puppet.core.ghostlink.net',
-    require                 => Firewalld_port['puppetdb-port']
     # 'postgresql-server'
   }
 
