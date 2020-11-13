@@ -12,7 +12,7 @@ class profiles::puppetmaster {
                                 {"name" =>  "Default yaml file", "path" =>  "common.yaml"},
                               ],
           eyaml           => true,
-          create_keys     => true,
+          create_keys     => false,
           hiera_yaml      => '/etc/hiera.yaml',
           create_symlink  => false,
   }
@@ -55,8 +55,20 @@ class profiles::puppetmaster {
   class { 'puppetdb':
     manage_package_repo     => false,
     postgres_version        => '',
-    database_listen_address => 'puppet.core.ghostlink.net',
-    # 'postgresql-server'
+    database_listen_address => '*',
+    database_host           => 'localhost',
+    manage_firewall         => false,
+#    # 'postgresql-server'
+  }
+
+  postgresql::server::pg_hba_rule { 'Postgresql':
+    description => 'Open up PostgreSQL puppetdb ',
+    type        => 'host',
+    database    => 'puppetdb',
+    user        => 'puppetdb',
+    address     => '::1/128',
+    auth_method => 'trust',
+    order       => '0'
   }
 
 

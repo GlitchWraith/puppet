@@ -17,11 +17,11 @@ bootstrap.pp
 ```ruby
 
 node puppet.core.ghostlink.net { 
+ 
   # Puppet hiera  setup
-   # Puppet hiera  setup
   class { 'hiera':
           hiera_version   =>  '5',
-          hiera5_defaults =>  {"datadir" => "hiera", "data_hash" => "yaml_data"},
+          hiera5_defaults =>  {"datadir" => "/etc/puppetlabs/code/environments/%{environment}/hiera", "data_hash" => "yaml_data"},
           hierarchy       =>  [
                                 {"name" =>  "Nodes yaml", "paths" =>  ['nodes/%{::trusted.certname}.yaml',]},
                                 {"name" =>  "OS", "paths" =>  ['os/%{facts.os.name}.yaml', 'os/%{::osfamily}.yaml']},
@@ -30,7 +30,7 @@ node puppet.core.ghostlink.net {
                                 {"name" =>  "Default yaml file", "path" =>  "common.yaml"},
                               ],
           eyaml           => true,
-          create_keys     => true,
+          create_keys     => false,
           hiera_yaml      => '/etc/hiera.yaml',
           create_symlink  => false,
   }
@@ -39,7 +39,7 @@ node puppet.core.ghostlink.net {
     server                => true,
     server_git_repo       => false,
     server_foreman        => false,
-    server_reports        => 'store',
+    server_reports        => 'store,puppetdb',
     server_external_nodes => '',
     server_certname       => 'puppet.core.ghostlink.net',
     dns_alt_names         =>  [
@@ -50,16 +50,44 @@ node puppet.core.ghostlink.net {
     hiera_config          => '/etc/hiera.yaml',
   }
 
-  #class { 'puppet::server::puppetdb':
-  #  server => 'puppet.core.ghostlink.net',
-  #}
+  class { 'puppet::server::puppetdb':
+    server => 'puppet.core.ghostlink.net',
+  }
 
-  #class { 'puppetdb':
-  #  manage_package_repo     => false,
-  #  postgres_version        => '',
-  #  database_listen_address => 'puppet.core.ghostlink.net'
-  #  # 'postgresql-server'
-  #}
+  firewalld_port { 'puppet-port':
+    ensure   => present,
+    zone     => 'public',
+    port     => 8140,
+    protocol => 'tcp',
+    before   => Class['::puppet']
+  }
+
+  firewalld_port { 'puppetdb-port':
+    ensure   => present,
+    zone     => 'public',
+    port     => 8081,
+    protocol => 'tcp',
+    before   => Class['puppetdb']
+  }
+
+  class { 'puppetdb':
+    manage_package_repo     => false,
+    postgres_version        => '',
+    database_listen_address => '*',
+    database_host           => 'localhost',
+    manage_firewall         => false,
+#    # 'postgresql-server'
+  }
+
+  postgresql::server::pg_hba_rule { 'Postgresql':
+    description => 'Open up PostgreSQL puppetdb ',
+    type        => 'host',
+    database    => 'puppetdb',
+    user        => 'puppetdb',
+    address     => '::1/128',
+    auth_method => 'trust',
+    order       => '0'
+  }
 
 
   package { 'git':
@@ -71,6 +99,18 @@ node puppet.core.ghostlink.net {
     remote => 'https://github.com/GlitchWraith/puppet.git',
   }
 
+  #class { 'r10k::webhook::config':
+  #  protected        => false,
+  #  gitlab_token     => 'THISISTHEGITLABWEBHOOKSECRET',
+  #  use_mcollective => false,
+  #}
+
+  #class {'r10k::webhook':
+  #  use_mcollective => false,
+  #  user            => 'root',
+  #  group           => '0',
+  #  require         => Class['r10k::webhook::config'],
+  #}
 
 }
 ```
