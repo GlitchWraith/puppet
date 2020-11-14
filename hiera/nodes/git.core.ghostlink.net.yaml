@@ -21,7 +21,7 @@ gitlab::gitlab_rails:
       port: 636
       uid: 'uid'
       method: 'ssl' # "tls" or "ssl" or "plain"
-      bind_dn: 'uid=puppetlookup,cn=users,cn=accounts,dn=ghostlink,dn=net'
+      bind_dn: 'uid=lookup,cn=users,cn=accounts,dn=ghostlink,dn=net'
       active_directory: false
       allow_username_or_email_login: false
       block_auto_created_users: false
