@@ -1,4 +1,4 @@
-gitlab::gitlab_rails::ldap_servers::password:: >
+gitlab::gitlab_rails::ldap_servers::freeipa::password:: >
     ENC[PKCS7,MIIEqQYJKoZIhvcNAQcDoIIEmjCCBJYCAQAxggQhMIIEHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggQABwhP8AY3gcAwAItB3k5OJOh6Vq5slexOcaLY
     o4HQr1MaqZ0FV68ljeW+uTurD1qEghZnd3u0YNJFfl6OffmTHvtVJ0nj6YOW
