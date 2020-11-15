@@ -15,7 +15,7 @@ gitlab::gitlab_rails:
   gitlab_email_display_name: 'GitLab'
   ldap_enabled: true
   ldap_servers:
-    myldapserver:
+    freeipa:
       label: 'Ghostlink LDAP'
       host: 'auth.idm.ghostlink.net'
       port: 636
@@ -28,5 +28,6 @@ gitlab::gitlab_rails:
       base: 'cn=users,cn=accounts,dn=ghostlink,dn=net'
       group_base: 'cn=groups,cn=accounts,dn=ghostlink,dn=net'
       user_filter: ''
+      ca_file: '/etc/gitlab/trusted-certs/ghostlink-crt.crt
 gitlab::sidekiq:
   shutdown_timeout: 5
