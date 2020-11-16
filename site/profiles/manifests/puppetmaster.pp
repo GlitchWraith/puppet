@@ -52,13 +52,15 @@ class profiles::puppetmaster {
     before   => Class['puppetdb']
   }
 
+
+
   class { 'puppetdb':
     manage_package_repo     => false,
     postgres_version        => '',
     database_listen_address => '*',
     database_host           => 'localhost',
     manage_firewall         => false,
-#    # 'postgresql-server'
+    # 'postgresql-server'
   }
 
   postgresql::server::pg_hba_rule { 'Postgresql':
