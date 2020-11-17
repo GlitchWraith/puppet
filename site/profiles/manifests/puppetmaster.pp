@@ -79,8 +79,8 @@ class profiles::puppetmaster {
   }
 
   class { 'r10k':
-    #remote => 'git@git.ghostlink.net:infra/puppet.git',
-    remote => 'https://github.com/GlitchWraith/puppet.git',
+    remote => 'https://git.ghostlink.net:infra/puppet.git',
+    #remote => 'https://github.com/GlitchWraith/puppet.git',
   }
 
   class { 'r10k::webhook::config':
