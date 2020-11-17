@@ -22,7 +22,7 @@ gitlab::gitlab_rails:
       uid: 'uid'
       method: 'ssl' # "tls" or "ssl" or "plain"
       bind_dn: 'uid=lookup,cn=users,cn=accounts,dc=ghostlink,dc=net'
-      password: "%{lookup('lookup_bind')"
+      password: "%{lookup('lookup_bind')}"
       active_directory: false
       allow_username_or_email_login: false
       block_auto_created_users: false

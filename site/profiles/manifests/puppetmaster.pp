@@ -79,7 +79,7 @@ class profiles::puppetmaster {
   }
 
   class { 'r10k':
-    remote => 'https://git.ghostlink.net:infra/puppet.git',
+    remote => 'git@git.ghostlink.net:infra/puppet.git',
     #remote => 'https://github.com/GlitchWraith/puppet.git',
   }
 
