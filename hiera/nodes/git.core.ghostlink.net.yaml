@@ -22,7 +22,7 @@ gitlab::gitlab_rails:
       uid: 'uid'
       method: 'ssl' # "tls" or "ssl" or "plain"
       bind_dn: 'uid=lookup,cn=users,cn=accounts,dc=ghostlink,dc=net'
-      password: "%{lookup(lookup_bind)"
+      password: "%{lookup('lookup_bind')"
       active_directory: false
       allow_username_or_email_login: false
       block_auto_created_users: false
@@ -30,5 +30,8 @@ gitlab::gitlab_rails:
       group_base: 'cn=groups,cn=accounts,dc=ghostlink,dc=net'
       user_filter: ''
       ca_file: '/etc/gitlab/trusted-certs/ghostlink-crt.crt'
+  omniauth_allow_single_sign_on: 'kerberos'
+  kerberos_enabled: true
+  kerberos_keytab: "/etc/http.keytab"
 gitlab::sidekiq:
   shutdown_timeout: 5

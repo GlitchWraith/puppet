@@ -83,18 +83,18 @@ class profiles::puppetmaster {
     remote => 'https://github.com/GlitchWraith/puppet.git',
   }
 
-  #class { 'r10k::webhook::config':
-  #  protected        => false,
-  #  gitlab_token     => 'THISISTHEGITLABWEBHOOKSECRET',
-  #  use_mcollective => false,
-  #}
+  class { 'r10k::webhook::config':
+    protected       => false,
+    gitlab_token    => lookup('gitlab-puppet'),
+    use_mcollective => false,
+  }
 
-  #class {'r10k::webhook':
-  #  use_mcollective => false,
-  #  user            => 'root',
-  #  group           => '0',
-  #  require         => Class['r10k::webhook::config'],
-  #}
+  class {'r10k::webhook':
+    use_mcollective => false,
+    user            => 'root',
+    group           => '0',
+    require         => Class['r10k::webhook::config'],
+  }
 
 
 }
